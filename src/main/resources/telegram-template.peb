@@ -1,1 +1,10 @@
-"<{{execution.namespace}} {{execution.flowId}} {{execution.id}} ➛ {{execution.state.current}} - Final task ID ➛ {{lastTask.taskId}}> {% if firstFailed == false %}Succeeded{% else %}Failed on task `{{firstFailed.taskId}}`{% endif %} after {{duration}} ({{link}})"
+<{{execution.namespace}} {{execution.flowId}} {{execution.id}} ➛ {{execution.state.current}} - Final task ID ➛ {{lastTask.taskId}}> {% if firstFailed == false %}Succeeded{% else %}Failed on task `{{firstFailed.taskId}}`{% endif %} after {{duration}} ({{link}})
+
+{% if customMessage is defined %}
+Message: {{ customMessage }}
+{% endif %}
+
+{% if customFields is defined and customFields is not empty %}
+{% for entry in customFields %}
+{{ entry.key }}: {{ entry.value }}
+{% endfor %} {% endif %}
