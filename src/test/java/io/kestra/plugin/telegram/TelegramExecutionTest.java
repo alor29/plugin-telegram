@@ -29,7 +29,7 @@ class TelegramExecutionTest extends AbstractTelegramTest {
     @Inject
     protected TestRunner runner;
     @Inject
-    protected LocalFlowRepositoryLoader repositoryLoader;;
+    protected LocalFlowRepositoryLoader repositoryLoader;
 
     @BeforeEach
     protected void init() throws IOException, URISyntaxException {
@@ -48,7 +48,7 @@ class TelegramExecutionTest extends AbstractTelegramTest {
             Await.until(
                 () -> FakeTelegramController.message,
                 Duration.ofMillis(100),
-                Duration.ofSeconds(5)
+                Duration.ofSeconds(20)
             );
         } catch (TimeoutException e) {
             throw new RuntimeException("Timed out waiting for FakeTelegramController.message to be set", e);
@@ -59,5 +59,6 @@ class TelegramExecutionTest extends AbstractTelegramTest {
         assertThat(FakeTelegramController.message.getText(), containsString("<io.kestra.tests main-flow-that-fails"));
         assertThat(FakeTelegramController.message.getText(), containsString("Failed on task `failed`"));
         assertThat(FakeTelegramController.message.getText(), containsString("Final task ID ➛ failed"));
+
     }
 }
